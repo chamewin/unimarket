@@ -92,25 +92,29 @@ class _SignInState extends State<SignIn> {
                           SizedBox(
                             height: 10,
                           ),
-                          RaisedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() => loading = true);
-                                dynamic result =
-                                    await _auth.signinWithEmailAndPassword(
-                                        email, password);
-                                if (result == null) {
-                                  setState(() {
-                                    error =
-                                        'Could not sign in with those cedentials';
-                                    loading = false;
-                                  });
+                          SizedBox(
+                            width: 250,
+                            child: RaisedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() => loading = true);
+                                  dynamic result =
+                                      await _auth.signinWithEmailAndPassword(
+                                          email, password);
+                                  if (result == null) {
+                                    setState(() {
+                                      error =
+                                          'Could not sign in with those cedentials';
+                                      loading = false;
+                                    });
+                                  }
                                 }
-                              }
-                            },
-                            child: Text('Sign In',
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
-                            color: Color(0xFF29BF12),
+                              },
+                              child: Text('Sign In',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 17)),
+                              color: Color(0xFF29BF12),
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -119,13 +123,17 @@ class _SignInState extends State<SignIn> {
                           SizedBox(
                             height: 10,
                           ),
-                          RaisedButton(
-                            onPressed: () async {
-                              widget.toggleView();
-                            },
-                            child: Text('Register',
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
-                            color: Color(0xFF29BF12),
+                          SizedBox(
+                            width: 250,
+                            child: RaisedButton(
+                              onPressed: () async {
+                                widget.toggleView();
+                              },
+                              child: Text('Register',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 17)),
+                              color: Color(0xFF29BF12),
+                            ),
                           ),
                         ],
                       ),

@@ -121,42 +121,50 @@ class _RegisterState extends State<Register> {
                           SizedBox(
                             height: 10,
                           ),
-                          RaisedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() => loading = true);
-                                dynamic result =
-                                    await _auth.registerWithEmailAndPassword(
-                                        fname, lname, email, password);
-                                if (result == null) {
-                                  setState(() {
-                                    error = 'Please supply a valid email';
-                                    setState(() => loading = false);
-                                  });
+                          SizedBox(
+                            width: 250,
+                            child: RaisedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() => loading = true);
+                                  dynamic result =
+                                      await _auth.registerWithEmailAndPassword(
+                                          fname, lname, email, password);
+                                  if (result == null) {
+                                    setState(() {
+                                      error = 'Please supply a valid email';
+                                      setState(() => loading = false);
+                                    });
+                                  }
                                 }
-                              }
-                            },
-                            child: Text('Register',
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
-                            color: Color(0xFF29BF12),
+                              },
+                              child: Text('Register',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 17)),
+                              color: Color(0xFF29BF12),
+                            ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
                           Text(
                             'Already have an account?',
                             style: TextStyle(fontSize: 16),
                           ),
+                          // SizedBox(
+                          //   height: 5,
+                          // ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          RaisedButton(
-                            onPressed: () async {
-                              widget.toggleView();
-                            },
-                            child: Text('Sign In',
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
-                            color: Color(0xFF29BF12),
+                            width: 250,
+                            child: RaisedButton(
+                              onPressed: () async {
+                                widget.toggleView();
+                              },
+                              child: Text('Sign In',
+                                  style: TextStyle(
+                                      color: Color(0xFFFFFFFF), fontSize: 17)),
+                              color: Color(0xFF29BF12),
+                            ),
                           ),
                         ],
                       ),

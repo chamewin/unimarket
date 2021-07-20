@@ -1,6 +1,7 @@
 import 'package:client/services/auth.dart';
 import 'package:client/shared/appbar.dart';
 import 'package:client/shared/drawer.dart';
+import 'package:client/shared/swipedcards.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -16,7 +17,7 @@ class Home extends StatelessWidget {
         appBar: AppBar(),
       ),
       drawer: DrawerCommon(),
-      // body: GroupList(),
+      body: Swipecard(),
     );
   }
 }
