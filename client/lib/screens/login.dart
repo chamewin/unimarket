@@ -23,8 +23,18 @@ class _LoginState extends State<Login> {
               children: [
                 Column(
                   children: [
-                    Image.asset('assets/images/uni_cropped.jpeg',
-                        alignment: Alignment.center),
+                    Container(
+                      height: 150,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/logowithtext.png',
+                          ),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
                     Text('uni market',
                         style: TextStyle(
                             fontFamily: 'DaysOne',
@@ -58,24 +68,29 @@ class _LoginState extends State<Login> {
                             ElevatedButton(
                                 onPressed: () {},
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 69.5, right: 69.5),
+                                  padding: const EdgeInsets.only(
+                                      left: 69.5, right: 69.5),
                                   child: Text('Get Started',
                                       style: TextStyle(
                                         fontFamily: 'Lato',
                                         fontSize: 14,
                                       )),
                                 ),
-                                style: ElevatedButton.styleFrom(primary: Color(0xff32912A))),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color(0xff32912A))),
                             ElevatedButton(
                                 onPressed: () {},
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 86.0, right: 86.0),
-                                  child: Text('Log In',
-                                      style: TextStyle(
-                                        fontFamily: 'Lato',
-                                        fontSize: 14,
-                                      ))),
-                                  style: ElevatedButton.styleFrom(primary: Color(0xff32912A).withOpacity(0.65))),
+                                    padding: const EdgeInsets.only(
+                                        left: 86.0, right: 86.0),
+                                    child: Text('Log In',
+                                        style: TextStyle(
+                                          fontFamily: 'Lato',
+                                          fontSize: 14,
+                                        ))),
+                                style: ElevatedButton.styleFrom(
+                                    primary:
+                                        Color(0xff32912A).withOpacity(0.65))),
                           ],
                         ),
                       ],
