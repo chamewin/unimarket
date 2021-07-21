@@ -1,4 +1,4 @@
-import 'package:client/screens/additem.dart';
+import 'package:client/screens/sellitem.dart';
 import 'package:client/services/auth.dart';
 import 'package:client/shared/appbar.dart';
 import 'package:client/shared/drawer.dart';
@@ -17,10 +17,11 @@ class Home extends StatelessWidget {
         title: Text(''),
         appBar: AppBar(),
         onpress: () async {
-          Navigator.push(context, MaterialPageRoute(builder: (_) => AddItem()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => SellItem()));
         },
-        label: Text("Add Items"),
-        icon: Icon(Icons.add_a_photo_rounded),
+        label: Text("Sell an Item"),
+        icon: Icon(Icons.sell),
       ),
       drawer: DrawerCommon(),
       body: Swipecard(),

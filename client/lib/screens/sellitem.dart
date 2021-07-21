@@ -20,7 +20,19 @@ class _AddItemState extends State<AddItem> {
 
   String iname = '';
   late Double iprice;
-  late File _image;
+  File? imageFile;
+  var isInitialized = false;
+
+  _getFromGallery() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,30 +63,44 @@ class _AddItemState extends State<AddItem> {
                             color: Colors.grey[300],
                             borderRadius: BorderRadius.circular(15)),
                         width: MediaQuery.of(context).size.width * 0.95,
-                        height: 200,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ListTile(
-                                // leading: Icon(Icons.add_a_photo_outlined),
-                                title: Icon(
-                                  Icons.add_a_photo_outlined,
-                                  size: 30,
+                        height: 300,
+                        child: imageFile == null
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ListTile(
+                                      // leading: Icon(Icons.add_a_photo_outlined),
+                                      title: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.add_a_photo_outlined,
+                                            size: 30,
+                                          ),
+                                        ],
+                                      ),
+                                      subtitle: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Add Photo from Library',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () async {
+                                        await _getFromGallery();
+                                      }),
+                                ],
+                              )
+                            : Container(
+                                child: Image.file(
+                                  imageFile!,
+                                  fit: BoxFit.contain,
                                 ),
-                                subtitle: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Add Photo from Library',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                  ],
-                                ),
-                                onTap: () async {
-                                  _imgFromGallery();
-                                }),
-                          ],
-                        ),
+                              ),
                       ),
                     ),
                     SizedBox(
@@ -125,6 +151,19 @@ class _AddItemState extends State<AddItem> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: 250,
+                      child: RaisedButton(
+                        onPressed: () {},
+                        child: Text('Sell this Item',
+                            style: TextStyle(
+                                color: Color(0xFFFFFFFF), fontSize: 17)),
+                        color: Color(0xFF29BF12),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -133,12 +172,5 @@ class _AddItemState extends State<AddItem> {
         ),
       ),
     );
-  }
-
-  _imgFromGallery() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    _image = image as File;
-    ;
   }
 }

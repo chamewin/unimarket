@@ -11,7 +11,6 @@ class Swipecard extends StatefulWidget {
 }
 
 class _SwipecardState extends State<Swipecard> {
-  List<Card> cards = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,7 +48,7 @@ class Card extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(15),
           color: rancolor,
         ),
       ),
