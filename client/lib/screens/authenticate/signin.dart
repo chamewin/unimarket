@@ -66,7 +66,11 @@ class _SignInState extends State<SignIn> {
                               setState(() => email = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                                hintText: 'Enter Email'),
+                              labelText: 'Email',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -80,7 +84,11 @@ class _SignInState extends State<SignIn> {
                               setState(() => password = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                                hintText: 'Enter Password'),
+                              labelText: 'Password',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 10,

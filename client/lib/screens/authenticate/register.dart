@@ -71,7 +71,11 @@ class _RegisterState extends State<Register> {
                               setState(() => fname = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                                hintText: 'First Name'),
+                              labelText: 'First Name',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -83,7 +87,11 @@ class _RegisterState extends State<Register> {
                               setState(() => lname = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                                hintText: 'Last Name'),
+                              labelText: 'Last Name',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -95,7 +103,11 @@ class _RegisterState extends State<Register> {
                               setState(() => email = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                                hintText: 'Enter Email'),
+                              labelText: 'Email',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -109,7 +121,11 @@ class _RegisterState extends State<Register> {
                               setState(() => password = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                                hintText: 'Enter Password'),
+                              labelText: 'Password',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 10,

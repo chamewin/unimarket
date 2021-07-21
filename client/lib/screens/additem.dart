@@ -1,10 +1,12 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:client/screens/home.dart';
 import 'package:client/shared/appbar.dart';
 import 'package:client/shared/constants.dart';
 import 'package:client/shared/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddItem extends StatefulWidget {
   const AddItem({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _AddItemState extends State<AddItem> {
 
   String iname = '';
   late Double iprice;
+  late File _image;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,41 @@ class _AddItemState extends State<AddItem> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(15)),
+                        width: MediaQuery.of(context).size.width * 0.95,
+                        height: 200,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ListTile(
+                                // leading: Icon(Icons.add_a_photo_outlined),
+                                title: Icon(
+                                  Icons.add_a_photo_outlined,
+                                  size: 30,
+                                ),
+                                subtitle: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Add Photo from Library',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () async {
+                                  _imgFromGallery();
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     TextFormField(
                       validator: (value) =>
                           value!.isEmpty ? 'Item\'s Name required' : null,
@@ -95,5 +133,12 @@ class _AddItemState extends State<AddItem> {
         ),
       ),
     );
+  }
+
+  _imgFromGallery() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    _image = image as File;
+    ;
   }
 }
