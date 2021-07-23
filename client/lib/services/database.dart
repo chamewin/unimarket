@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final String uid;
@@ -18,6 +21,32 @@ class DatabaseService {
   }
 }
 
+class FirebaseApi {
+  static UploadTask? uploadImage(String destination, File file) {
+    try {
+      final ref = FirebaseStorage.instance.ref(destination);
+      return ref.putFile(file);
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+}
+
+class ItemPost {
+  ItemPost({dynamic});
+  final CollectionReference sellCollection =
+      FirebaseFirestore.instance.collection('sellitems');
+
+  Future postsellitem(
+      String url, String title, double price, String description) async {
+    return await sellCollection.doc().set({
+      'imageURL': url,
+      'Title': title,
+      'Price': price,
+      'Description': description,
+    });
+  }
+}
 // class DataPost {
 //   DataPost({dynamic});
 
