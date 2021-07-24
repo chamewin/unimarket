@@ -38,7 +38,7 @@ class ItemPost {
       FirebaseFirestore.instance.collection('sellitems');
 
   Future postsellitem(
-      String url, String title, double price, String description) async {
+      String url, String title, int price, String description) async {
     return await sellCollection.doc().set({
       'imageURL': url,
       'Title': title,

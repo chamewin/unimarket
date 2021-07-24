@@ -27,7 +27,7 @@ class _SellItemState extends State<SellItem> {
 
   // Variable for data
   late String iname;
-  late double iprice;
+  late int iprice;
   late String idescript;
   String error = '';
 
@@ -144,9 +144,12 @@ class _SellItemState extends State<SellItem> {
                                     ),
                             ),
                           ),
-                          Text(
-                            fileName,
-                          ),
+
+                          //Image name when picture is chosen
+                          // Text(
+                          //   fileName,
+                          // ),
+
                           SizedBox(
                             height: 10,
                           ),
@@ -170,13 +173,15 @@ class _SellItemState extends State<SellItem> {
                             keyboardType: TextInputType.number,
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.]')),
+                                  RegExp(r'[0-9]')),
                             ],
                             validator: (value) => value!.isEmpty
                                 ? 'Item\'s Price required'
                                 : null,
                             onChanged: (value) {
-                              setState(() => iprice = double.parse(value));
+                              setState(() {
+                                iprice = int.parse(value);
+                              });
                             },
                             decoration: textInputDecoration.copyWith(
                               labelText: 'Price',
@@ -226,6 +231,7 @@ class _SellItemState extends State<SellItem> {
                                 if (_formKey.currentState!.validate()) {
                                   setState(() => loading = true);
                                   await _uploadImage();
+
                                   if (uploadURL == null) {
                                     setState(() {
                                       error =
@@ -241,10 +247,6 @@ class _SellItemState extends State<SellItem> {
                                       MaterialPageRoute(
                                           builder: (_) => Home()));
                                 }
-                                // await _uploadImage();
-                                // // Navigator.push(context,
-                                // //     MaterialPageRoute(builder: (_) => Home()));
-                                print('the link is: $uploadURL');
                               },
                               child: Text('Sell this Item',
                                   style: TextStyle(
