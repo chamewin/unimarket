@@ -28,19 +28,95 @@ class _ItemListState extends State<ItemList> {
             return ListView(
               children: snapshot.data!.docs.map((doc) {
                 return SizedBox(
-                  width: 100,
-                  height: 500,
                   child: Card(
-                    color: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      side: BorderSide(width: 2, color: Colors.green),
+                    ),
+                    color: Color(0xFFf1faee),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      // mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
                           // leading: Icon(Icons.podcasts_outlined),
                           // isThreeLine: true,
                           // tileColor: Color(0x55caf0f8),
-                          title: Text(
-                            '${doc['Title']}',
+                          title: Column(
+                            children: [
+                              SizedBox(
+                                child: Image.network('${doc['imageURL']}',
+                                    fit: BoxFit.contain),
+                                height: MediaQuery.of(context).size.width * 0.8,
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 20, 0, 5),
+                                alignment: Alignment.topLeft,
+                                // color: Colors.red,
+                                child: Text(
+                                  '${doc['Title']}',
+                                  style: TextStyle(
+                                    fontFamily: 'DaysOne',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    // color: Color(0xFF29BF12),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                alignment: Alignment.topLeft,
+                                // color: Colors.orange,
+                                child: Text(
+                                  '\$${doc['Price']}',
+                                  style: TextStyle(
+                                    fontSize: 23,
+                                    color: Color(0xFF29BF12),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              Divider(
+                                thickness: 2,
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 5),
+                                alignment: Alignment.topLeft,
+                                // color: Colors.yellow,
+                                child: Text(
+                                  'Description:',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                                alignment: Alignment.topLeft,
+                                // color: Colors.yellow,
+                                child: Text('${doc['Description']}'),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 5),
+                                alignment: Alignment.topLeft,
+                                // color: Colors.yellow,
+                                child: Text(
+                                  'Seller:',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 5),
+                                alignment: Alignment.topLeft,
+                                // color: Colors.yellow,
+                                child: Text('${doc['Seller']}'),
+                              ),
+                            ],
                           ),
 
                           // subtitle: Text(
@@ -52,6 +128,7 @@ class _ItemListState extends State<ItemList> {
                           //   ),
                           //   textAlign: TextAlign.left,
                           // ),
+                          onTap: () {},
                         ),
                       ],
                     ),
