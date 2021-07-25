@@ -2,6 +2,8 @@ import 'dart:ffi';
 import 'dart:io';
 import 'package:client/services/database.dart';
 import 'package:client/shared/loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -38,6 +40,21 @@ class _SellItemState extends State<SellItem> {
   UploadTask? task;
   String? uploadURL;
 
+  //Variable for username and uid
+  User user = FirebaseAuth.instance.currentUser!;
+  String username = '';
+  String useruid = '';
+
+  void getUserNameAndUID(documentId) {
+    CollectionReference users = FirebaseFirestore.instance.collection('Users');
+    users.doc(documentId).get().then((DocumentSnapshot documentSnapshot) {
+      setState(() => username = documentSnapshot.get('Full Name'));
+    });
+    users.doc(documentId).get().then((DocumentSnapshot documentSnapshot) {
+      setState(() => useruid = documentSnapshot.get('User ID'));
+    });
+  }
+
   selectImage() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
@@ -70,6 +87,7 @@ class _SellItemState extends State<SellItem> {
 
   @override
   Widget build(BuildContext context) {
+    getUserNameAndUID(user.uid);
     final fileName = imageFile != null ? basename(imageFile!.path) : '';
     // _uploadImage();
     return loading
@@ -239,8 +257,8 @@ class _SellItemState extends State<SellItem> {
                                       setState(() => loading = false);
                                     });
                                   }
-                                  await _item.postsellitem(
-                                      uploadURL!, iname, iprice, idescript);
+                                  await _item.postsellitem(uploadURL!, iname,
+                                      iprice, idescript, username, useruid);
 
                                   Navigator.push(
                                       context,

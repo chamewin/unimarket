@@ -17,6 +17,7 @@ class DatabaseService {
       'First Name': fname,
       'Last Name': lname,
       'Register Date': date,
+      'User ID': uid,
     });
   }
 }
@@ -37,13 +38,15 @@ class ItemPost {
   final CollectionReference sellCollection =
       FirebaseFirestore.instance.collection('sellitems');
 
-  Future postsellitem(
-      String url, String title, int price, String description) async {
+  Future postsellitem(String url, String title, int price, String description,
+      String username, String useruid) async {
     return await sellCollection.doc().set({
       'imageURL': url,
       'Title': title,
       'Price': price,
       'Description': description,
+      'Seller': username,
+      'Seller ID': useruid,
     });
   }
 }
