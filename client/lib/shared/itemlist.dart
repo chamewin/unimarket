@@ -10,6 +10,9 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
+  //Variable to keep itemID
+  String itemID = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,8 +141,6 @@ class _ItemListState extends State<ItemList> {
                   ),
                 );
               }).toList(),
-
-              // '${snapshot.data!.docs.map((document) => document['Input'])}'),
             );
           }
         },
@@ -149,43 +150,45 @@ class _ItemListState extends State<ItemList> {
 
   void alert(context, uid) async {
     return showDialog(
-        context: context,
-        builder: (BuildContext bc) {
-          return AlertDialog(
-            title: Text(
-              'Do you want to buy this item?',
-              style: TextStyle(
-                fontSize: 20,
-                color: Color(0xFF2a9d8f),
+      context: context,
+      builder: (BuildContext bc) {
+        return AlertDialog(
+          title: Text(
+            'Do you want to buy this item?',
+            style: TextStyle(
+              fontSize: 20,
+              color: Color(0xFF29BF12),
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+              child: Text(
+                "No",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFFe76f51),
+                ),
               ),
             ),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => Payment(value: uid)));
-                },
-                child: Text(
-                  "Yes",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xFF2a9d8f),
-                  ),
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => Payment(value: uid)));
+              },
+              child: Text(
+                "Yes",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFF29BF12),
                 ),
               ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true).pop();
-                },
-                child: Text(
-                  "No",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xFFe76f51),
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
+            ),
+          ],
+        );
+      },
+    );
   }
 }

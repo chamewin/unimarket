@@ -1,4 +1,3 @@
-import 'package:client/shared/itemlist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,23 +6,6 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 import '../wrapper.dart';
 
-/*
-class Payment extends StatefulWidget {
-
-  @override
-  _PaymentState createState() => _PaymentState();
-}
-
-class _PaymentState extends State<Payment> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text("Payment Page")
-    );
-  }
-}
-*/
-
 class Payment extends StatefulWidget {
   final String value;
   Payment({Key? key, required this.value}) : super(key: key);
@@ -31,7 +13,6 @@ class Payment extends StatefulWidget {
   @override
   _PaymentState createState() => _PaymentState(value);
 }
-
 
 class _PaymentState extends State<Payment> {
   String value;
@@ -43,7 +24,7 @@ class _PaymentState extends State<Payment> {
   String expiryDate = '';
   bool showBackView = false;
 
-  void onCreditCardModel(CreditCardModel creditCardModel){
+  void onCreditCardModel(CreditCardModel creditCardModel) {
     setState(() {
       cardNumber = creditCardModel.cardNumber;
       cardHolderName = creditCardModel.cardHolderName;
@@ -55,10 +36,8 @@ class _PaymentState extends State<Payment> {
 
   @override
   Widget build(BuildContext context) {
-
-    DocumentReference documentReference = FirebaseFirestore.instance
-  .collection('sellitems')
-  .doc(value);
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection('sellitems').doc(value);
     return Scaffold(
       appBar: AppBar(
         title: Text('Payment'),
@@ -68,14 +47,16 @@ class _PaymentState extends State<Payment> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             CreditCardWidget(
-                cardNumber: cardNumber,
-                expiryDate: expiryDate,
-                height: 210,
-                cardHolderName: cardHolderName,
-                cvvCode: cvvNumber,
-                showBackView: showBackView,
+              cardNumber: cardNumber,
+              expiryDate: expiryDate,
+              height: 210,
+              cardHolderName: cardHolderName,
+              cvvCode: cvvNumber,
+              showBackView: showBackView,
               cardBgColor: Colors.greenAccent,
               textStyle: TextStyle(
                 color: Colors.black,
@@ -85,29 +66,38 @@ class _PaymentState extends State<Payment> {
               animationDuration: Duration(milliseconds: 1200),
             ),
             Expanded(
-                child: SingleChildScrollView(
-                  child: CreditCardForm(
-                      onCreditCardModelChange: onCreditCardModel,
-                    cursorColor: Colors.red,
-                    themeColor: Colors.black, 
-                    cardHolderName: '', 
-                    cardNumber: '', 
-                    cvvCode: '',
-                    expiryDate: '', 
-                    formKey: null,
-                  ),
+              child: SingleChildScrollView(
+                child: CreditCardForm(
+                  onCreditCardModelChange: onCreditCardModel,
+                  cursorColor: Colors.red,
+                  themeColor: Colors.black,
+                  cardHolderName: '',
+                  cardNumber: '',
+                  cvvCode: '',
+                  expiryDate: '',
+                  formKey: null,
                 ),
+              ),
             ),
-            ElevatedButton(onPressed: () async {
-            await FirebaseFirestore.instance.runTransaction((transaction) async {
-              transaction.delete(documentReference);
-            })
-            .then((value) => print("Deleted Listing"))
-            .catchError((error) => print("Failed delete listing"));
+            SizedBox(
+              width: 250,
+              child: RaisedButton(
+                  color: Color(0xFF29BF12),
+                  onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .runTransaction((transaction) async {
+                          transaction.delete(documentReference);
+                        })
+                        .then((value) => print("Deleted Listing"))
+                        .catchError((error) => print("Failed delete listing"));
 
-              Navigator.push(context, MaterialPageRoute(builder: (_) => Wrapper()));
-            }, 
-            child: Text("Pay")),
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => Wrapper()));
+                  },
+                  child: Text("Pay",
+                      style:
+                          TextStyle(color: Color(0xFFFFFFFF), fontSize: 17))),
+            ),
           ],
         ),
       ),
