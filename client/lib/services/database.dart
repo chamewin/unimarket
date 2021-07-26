@@ -40,7 +40,7 @@ class ItemPost {
 
   Future postsellitem(String url, String title, int price, String description,
       String username, String useruid) async {
-    return await sellCollection.doc().set({
+    return await sellCollection.doc(useruid).set({
       'imageURL': url,
       'Title': title,
       'Price': price,

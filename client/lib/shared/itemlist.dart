@@ -1,3 +1,4 @@
+import 'package:client/screens/authenticate/payment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -128,7 +129,9 @@ class _ItemListState extends State<ItemList> {
                           //   ),
                           //   textAlign: TextAlign.left,
                           // ),
-                          onTap: () {},
+                          onTap: () {
+                            alert(context);
+                          },
                         ),
                       ],
                     ),
@@ -142,5 +145,47 @@ class _ItemListState extends State<ItemList> {
         },
       ),
     );
+  }
+
+  void alert(context) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext bc) {
+          return AlertDialog(
+            title: Text(
+              'Do you want to buy this item?',
+              style: TextStyle(
+                fontSize: 20,
+                color: Color(0xFF2a9d8f),
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => Payment()));
+                },
+                child: Text(
+                  "Yes",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFF2a9d8f),
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                },
+                child: Text(
+                  "No",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFFe76f51),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
