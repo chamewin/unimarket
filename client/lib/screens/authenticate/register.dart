@@ -139,6 +139,7 @@ class _RegisterState extends State<Register> {
                           ),
                           SizedBox(
                             width: 250,
+                            // ignore: deprecated_member_use
                             child: RaisedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
@@ -172,6 +173,7 @@ class _RegisterState extends State<Register> {
                           // ),
                           SizedBox(
                             width: 250,
+                            // ignore: deprecated_member_use
                             child: RaisedButton(
                               onPressed: () async {
                                 widget.toggleView();

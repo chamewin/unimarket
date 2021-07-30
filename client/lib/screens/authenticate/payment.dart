@@ -81,6 +81,7 @@ class _PaymentState extends State<Payment> {
             ),
             SizedBox(
               width: 250,
+              // ignore: deprecated_member_use
               child: RaisedButton(
                   color: Color(0xFF29BF12),
                   onPressed: () async {
