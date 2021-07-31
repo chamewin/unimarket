@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "674878896006",
-    "project_id": "groupproj02-market",
-    "storage_bucket": "groupproj02-market.appspot.com"
+    "project_number": "114826161845",
+    "project_id": "unimarket-f0189",
+    "storage_bucket": "unimarket-f0189.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:674878896006:android:6bf0c1e7f92023e6c51e07",
+        "mobilesdk_app_id": "1:114826161845:android:cf87f43e1fcd9f31d058fc",
         "android_client_info": {
           "package_name": "com.chamewin.client"
         }
       },
       "oauth_client": [
         {
-          "client_id": "674878896006-08fgfv9m2hdv6ejke1bf5akvo47q4ghl.apps.googleusercontent.com",
+          "client_id": "114826161845-7svkh3jgsft147slbi8ttn8o2gimhb08.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBg5fNVbQb_bk8Gm_eitsyGTJ6IDoEnEns"
+          "current_key": "AIzaSyAGz-ledBE-pjwt_3u06ivwPCay7MO3hpg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "674878896006-08fgfv9m2hdv6ejke1bf5akvo47q4ghl.apps.googleusercontent.com",
+              "client_id": "114826161845-7svkh3jgsft147slbi8ttn8o2gimhb08.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

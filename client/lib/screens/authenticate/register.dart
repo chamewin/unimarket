@@ -1,6 +1,7 @@
 import 'package:client/services/auth.dart';
 import 'package:client/shared/constants.dart';
 import 'package:client/shared/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -15,17 +16,25 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 // Create instant object _auth
+
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
   //Text field state
-
   String fname = '';
   String lname = '';
-  String email = '';
-  String password = '';
+  String uname = '';
+  String phoneNumber = '';
   String error = '';
+
+  Future signUp() async {
+    setState(() {
+      loading = true;
+    });
+
+    await FirebaseAuth.instance.verifyPhoneNumber(phoneNumber: phoneNumber, codeAutoRetrievalTimeout: (String verificationId) {  }, codeSent: (String verificationId, int? forceResendingToken) {  }, verificationCompleted: (PhoneAuthCredential phoneAuthCredential) {  }, verificationFailed: (FirebaseAuthException error) {  },  );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,12 +107,12 @@ class _RegisterState extends State<Register> {
                           ),
                           TextFormField(
                             validator: (value) =>
-                                value!.isEmpty ? 'Enter an Email' : null,
+                                value!.isEmpty ? 'Enter Username' : null,
                             onChanged: (value) {
-                              setState(() => email = value);
+                              setState(() => uname = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                              labelText: 'Email',
+                              labelText: 'Username',
                               labelStyle: TextStyle(
                                 color: Colors.black,
                               ),
@@ -113,23 +122,19 @@ class _RegisterState extends State<Register> {
                             height: 10,
                           ),
                           TextFormField(
-                            obscureText: true,
-                            validator: (value) => value!.length < 6
-                                ? 'Enter an 6+ chars long password'
-                                : null,
+                            validator: (value) =>
+                                value!.isEmpty ? 'Enter a Phone Number' : null,
                             onChanged: (value) {
-                              setState(() => password = value);
+                              setState(() => phoneNumber = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                              labelText: 'Password',
+                              labelText: 'Phone Number',
                               labelStyle: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
+
                           Text(
                             error,
                             style: TextStyle(color: Colors.red, fontSize: 14),
@@ -142,18 +147,7 @@ class _RegisterState extends State<Register> {
                             // ignore: deprecated_member_use
                             child: RaisedButton(
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  setState(() => loading = true);
-                                  dynamic result =
-                                      await _auth.registerWithEmailAndPassword(
-                                          fname, lname, email, password);
-                                  if (result == null) {
-                                    setState(() {
-                                      error = 'Please supply a valid email';
-                                      setState(() => loading = false);
-                                    });
-                                  }
-                                }
+                                signUp();
                               },
                               child: Text('Register',
                                   style: TextStyle(

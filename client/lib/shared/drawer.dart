@@ -1,3 +1,4 @@
+import 'package:client/screens/sellers.dart';
 import 'package:client/screens/wrapper.dart';
 import 'package:client/services/auth.dart';
 import 'package:client/shared/customlisttile.dart';
@@ -19,10 +20,10 @@ class _DrawerCommonState extends State<DrawerCommon> {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Wrapper()));
           }),
-          // CustomListTile(Icons.person, 'Profile', () {
-          //   Navigator.of(context).pushReplacement(
-          //       MaterialPageRoute(builder: (context) => Profile()));
-          // }),
+          CustomListTile(Icons.person, 'Sellers', () {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Sellers()));
+          }),
           // CustomListTile(Icons.settings, 'Settings', () {
           //   Navigator.of(context).pushReplacement(
           //       MaterialPageRoute(builder: (context) => Setting()));

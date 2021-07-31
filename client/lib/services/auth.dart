@@ -44,6 +44,7 @@ class AuthService {
     }
   }
 
+  
   //register email & pass
   Future registerWithEmailAndPassword(
       String fname, String lname, String email, String password) async {

@@ -21,9 +21,7 @@ class _SignInState extends State<SignIn> {
   bool loading = false;
 
   //Text field state
-  String email = '';
-  String password = '';
-  String error = '';
+  String phoneNumber = '';
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +61,10 @@ class _SignInState extends State<SignIn> {
                             validator: (value) =>
                                 value!.isEmpty ? 'Enter a valid Email' : null,
                             onChanged: (value) {
-                              setState(() => email = value);
+                              setState(() => phoneNumber = value);
                             },
                             decoration: textInputDecoration.copyWith(
-                              labelText: 'Email',
+                              labelText: 'Phone Number',
                               labelStyle: TextStyle(
                                 color: Colors.black,
                               ),
@@ -75,28 +73,10 @@ class _SignInState extends State<SignIn> {
                           SizedBox(
                             height: 10,
                           ),
-                          TextFormField(
-                            validator: (value) => value!.length < 6
-                                ? 'Enter an 6+ chars long password'
-                                : null,
-                            obscureText: true,
-                            onChanged: (value) {
-                              setState(() => password = value);
-                            },
-                            decoration: textInputDecoration.copyWith(
-                              labelText: 'Password',
-                              labelStyle: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            error,
-                            style: TextStyle(color: Colors.red, fontSize: 14),
-                          ),
+                          // Text(
+                          //   error,
+                          //   style: TextStyle(color: Colors.red, fontSize: 14),
+                          // ),
                           SizedBox(
                             height: 10,
                           ),
@@ -104,32 +84,25 @@ class _SignInState extends State<SignIn> {
                             width: 250,
                             child: RaisedButton(
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  setState(() => loading = true);
-                                  dynamic result =
-                                      await _auth.signinWithEmailAndPassword(
-                                          email, password);
-                                  if (result == null) {
-                                    setState(() {
-                                      error =
-                                          'Could not sign in with those cedentials';
-                                      loading = false;
-                                    });
-                                  }
-                                }
+                                // if (_formKey.currentState!.validate()) {
+                                //   setState(() => loading = true);
+                                //   dynamic result =
+                                //       await _auth.signinWithEmailAndPassword(
+                                //           email, password);
+                                //   if (result == null) {
+                                //     setState(() {
+                                //       error =
+                                //           'Could not sign in with those cedentials';
+                                //       loading = false;
+                                //     });
+                                //   }
+                                // }
                               },
                               child: Text('Sign In',
                                   style: TextStyle(
                                       color: Color(0xFFFFFFFF), fontSize: 17)),
                               color: Color(0xFF29BF12),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text('Or'),
-                          SizedBox(
-                            height: 10,
                           ),
                           SizedBox(
                             width: 250,
